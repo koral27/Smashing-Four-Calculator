@@ -68,3 +68,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Список замечаний и пожеланий
+
+- Сохранять данные в localstorage
+- Нельзя ручками вводить уровень, потому что если ввести 1 - все сломается
+- Пожелание: при вводе количесва карточек, не стирать 0, что бы он сам это делал
+- Сделать сортировку
+- Сделать перетаскивание строк
+- Добавить колонку с подсчетом денег до потенц уровня
+- Добавить инфо табличку с уровнями и деньгами (как в екселе)
+- Сделать кнопочки больше

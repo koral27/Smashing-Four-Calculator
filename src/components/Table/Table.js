@@ -1,31 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Row } from '../Row';
-import { fields, data } from '../../constants';
+import { fields } from '../../constants';
 
 export const Table = ({ heroes }) => {
-  const calculate = (cards, level, type, data) => {
-    const filterType = data.heroType[type]; // определяем по какому типу смотрим стату
-
-    let nextLevelReq = filterType[level + 1];
-    let needCards = nextLevelReq.cards;
-    let ostatok = cards;
-    let potentialLevel = Number(ostatok) >= needCards ? level + 1 : level;
-
-    for (let l = potentialLevel; l < 20; l++) {
-      if (l < 20) {
-        nextLevelReq = filterType[potentialLevel];
-        needCards = nextLevelReq.cards;
-        ostatok = ostatok - needCards;
-      }
-      if (ostatok - filterType[l + 1].cards >= 0) {
-        potentialLevel++;
-      } else {
-        break;
-      }
-    }
-
-    return potentialLevel;
+  const user = localStorage.getItem('user');
+  const datas = {
+    Sasha: [],
+    Nasya: [],
   };
+
+  localStorage.setItem('smashing', JSON.stringify(datas));
+
+  console.log(JSON.parse(localStorage.getItem('smashing')));
+
   return (
     <div>
       <table cellPadding={10} border={2}>
@@ -35,17 +22,13 @@ export const Table = ({ heroes }) => {
               <td key={label}>{label}</td>
             ))}
             <td>Потенциальный уровень</td>
+            <td>Не хватает до след. уровня</td>
           </tr>
         </thead>
         <tbody>
           {heroes.map(({ name, heroType }) => {
             return (
-              <Row
-                key={name}
-                name={name}
-                heroType={heroType}
-                calculate={calculate}
-              />
+              <Row key={name} name={name} heroType={heroType} user={user} />
             );
           })}
         </tbody>

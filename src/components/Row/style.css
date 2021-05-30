@@ -1,0 +1,16 @@
+.bold {
+  font-weight: bold;
+}
+
+.common {
+  background-color: gainsboro;
+}
+
+.rare {
+  background-color: #ffc107;
+}
+
+.epic {
+  background-color: #673ab7;
+  color: white;
+}

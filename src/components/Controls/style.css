@@ -1,0 +1,25 @@
+.wrapper {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid;
+}
+
+.profile {
+  margin-bottom: 20px;
+}
+
+.select {
+  padding: 10px;
+  font-size: 18px;
+}
+
+.btn {
+  margin-left: 20px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 0;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

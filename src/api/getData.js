@@ -1,5 +1,5 @@
-import XLSX from 'xlsx';
-import readXlsxFile from 'read-excel-file';
+// import XLSX from 'xlsx';
+// import readXlsxFile from 'read-excel-file';
 
 const path = './data.xlsx';
 
