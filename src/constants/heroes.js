@@ -1,4 +1,4 @@
-export const heroTypes = ['Обычный', 'Редкий', 'Эпичный'];
+export const heroTypes = ['common', 'rare', 'epic'];
 
 const COMMON = heroTypes[0];
 const RARE = heroTypes[1];

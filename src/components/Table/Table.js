@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../context';
 import { Row } from '../Row';
 import { fields } from '../../constants';
 
-export const Table = ({ heroes }) => {
-  const user = localStorage.getItem('user');
-  const datas = {
-    Sasha: [],
-    Nasya: [],
-  };
+export const Table = () => {
+  const { users, activeUser, setActiveUser } = useContext(Context);
 
-  localStorage.setItem('smashing', JSON.stringify(datas));
+  const filtered =
+    users && users.filter(({ username }) => username === activeUser);
 
-  console.log(JSON.parse(localStorage.getItem('smashing')));
+  console.log('filtered', filtered);
+
+  // TODO: добавить состояние загрузки, пока не загрузятся данные из базы
 
   return (
     <div>
@@ -26,11 +26,19 @@ export const Table = ({ heroes }) => {
           </tr>
         </thead>
         <tbody>
-          {heroes.map(({ name, heroType }) => {
-            return (
-              <Row key={name} name={name} heroType={heroType} user={user} />
-            );
-          })}
+          {(filtered && filtered.length) === 1 &&
+            filtered[0].data.map(({ hero, type, cards, currentLevel }) => {
+              return (
+                <Row
+                  key={hero}
+                  name={hero}
+                  heroType={type}
+                  user={activeUser}
+                  cards={cards}
+                  level={currentLevel}
+                />
+              );
+            })}
         </tbody>
       </table>
     </div>

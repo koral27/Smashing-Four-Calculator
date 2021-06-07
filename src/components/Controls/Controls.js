@@ -1,32 +1,35 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Context } from '../../context';
 import './style.css';
 
 export const Controls = () => {
-  const context = useContext(Context);
-  const [user, setUser] = useState(localStorage.getItem('user'));
-  console.log(context);
-  const handleClick = () => {
-    localStorage.setItem('user', user);
-  };
+  const { users, activeUser, setActiveUser } = useContext(Context);
+
+  const handleClick = () => {};
+
+  const createUser = () => {};
 
   return (
     <div className="wrapper">
       <div className="profile">
-        Выбран профиль: <b>{user}</b>
+        Выбран профиль: <b>{activeUser}</b>
       </div>
       <div className="d-flex">
         <select
           className="select"
           onChange={(e) => {
-            setUser(e.target.value);
+            setActiveUser(e.target.value);
           }}
         >
           <option disabled defaultValue>
             Сменить профиль
           </option>
-          <option value="Нася">Нася</option>
-          <option value="Саша">Саша</option>
+          {users &&
+            users.map(({ username }) => (
+              <option key={username} value={username}>
+                {username}
+              </option>
+            ))}
         </select>
         <button className="btn" onClick={handleClick}>
           Сохранить
