@@ -11,9 +11,8 @@ const mapHeroes = ({ name, heroType }) => {
   return {
     hero: name,
     type: heroType,
-    cards: 1000,
-    currentLevel: 10,
-    cardsToNext: 500,
+    cards: 0,
+    currentLevel: 9,
   };
 };
 
@@ -41,6 +40,7 @@ const App = () => {
       .get()
       .then((snapshot) => {
         const users = snapshot.val();
+
         setUsers(Object.values(users));
         if (!activeUser) {
           console.log('setActiveUser');
@@ -58,7 +58,7 @@ const App = () => {
       .then(() => setLoading(false))
       .catch((e) => console.log('catch', e));
 
-    // usersData.set(initialData);
+    // firebase.database().ref('users').set(initialData);
 
     getData();
   }, []);

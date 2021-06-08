@@ -15,6 +15,10 @@
   color: white;
 }
 
+.cardsField input {
+  width: 70px;
+}
+
 .levelField {
   display: flex;
 }

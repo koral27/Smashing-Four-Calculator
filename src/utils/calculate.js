@@ -1,7 +1,23 @@
 const MAX_LEVEL = 20;
+const MIN_LEVEL = 9;
 
 export const calculate = (cards, level, type, data) => {
   const filterType = data.heroType[type]; // определяем по какому типу смотрим стату
+
+  if (level >= MAX_LEVEL) {
+    return {
+      potentialLevel: MAX_LEVEL,
+      needs: 0,
+    };
+  }
+
+  // TODO: Доработать это условие
+  if (level < MIN_LEVEL) {
+    return {
+      potentialLevel: MIN_LEVEL,
+      needs: filterType[MIN_LEVEL + 1].cards - cards,
+    };
+  }
 
   let nextLevelReq = filterType[level + 1];
   let needCards = nextLevelReq.cards;

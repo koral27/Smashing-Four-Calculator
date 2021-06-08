@@ -17,7 +17,7 @@ export const Row = ({ name, heroType, cards, level, index }) => {
           ? 'Редкий'
           : 'Эпичный'}
       </td>
-      <td>
+      <td className="cardsField">
         <input
           type="text"
           value={cards}
@@ -26,28 +26,30 @@ export const Row = ({ name, heroType, cards, level, index }) => {
           }}
         ></input>
       </td>
-      <td className="levelField">
-        <button
-          onClick={() => {
-            update(level - 1, index, 'currentLevel');
-          }}
-        >
-          -
-        </button>
-        <input
-          type="text"
-          value={level}
-          onChange={(e) => {
-            update(e.target.value, index, 'currentLevel');
-          }}
-        ></input>
-        <button
-          onClick={() => {
-            update(level + 1, index, 'currentLevel');
-          }}
-        >
-          +
-        </button>
+      <td>
+        <div className="levelField">
+          <button
+            onClick={() => {
+              update(level - 1, index, 'currentLevel');
+            }}
+          >
+            -
+          </button>
+          <input
+            type="text"
+            value={level}
+            onChange={(e) => {
+              update(e.target.value, index, 'currentLevel');
+            }}
+          ></input>
+          <button
+            onClick={() => {
+              update(level + 1, index, 'currentLevel');
+            }}
+          >
+            +
+          </button>
+        </div>
       </td>
       <td>{calculate(cards, level, heroType, data).potentialLevel}</td>
       <td>{calculate(cards, level, heroType, data).needs}</td>
