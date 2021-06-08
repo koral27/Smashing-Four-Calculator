@@ -26,16 +26,28 @@ export const Row = ({ name, heroType, cards, level, index }) => {
           }}
         ></input>
       </td>
-      <td>
+      <td className="levelField">
+        <button
+          onClick={() => {
+            update(level - 1, index, 'currentLevel');
+          }}
+        >
+          -
+        </button>
         <input
-          type="number"
+          type="text"
           value={level}
-          min={9}
-          max={19}
           onChange={(e) => {
             update(e.target.value, index, 'currentLevel');
           }}
         ></input>
+        <button
+          onClick={() => {
+            update(level + 1, index, 'currentLevel');
+          }}
+        >
+          +
+        </button>
       </td>
       <td>{calculate(cards, level, heroType, data).potentialLevel}</td>
       <td>{calculate(cards, level, heroType, data).needs}</td>

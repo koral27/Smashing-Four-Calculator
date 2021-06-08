@@ -1,3 +1,5 @@
+const MAX_LEVEL = 20;
+
 export const calculate = (cards, level, type, data) => {
   const filterType = data.heroType[type]; // определяем по какому типу смотрим стату
 
@@ -6,9 +8,9 @@ export const calculate = (cards, level, type, data) => {
   let ostatok = cards;
   let potentialLevel = Number(ostatok) >= needCards ? level + 1 : level;
 
-  for (let l = potentialLevel; l < 20; l++) {
+  for (let l = potentialLevel; l < MAX_LEVEL; l++) {
     if (ostatok - needCards < 0) break;
-    if (l < 20) {
+    if (l < MAX_LEVEL) {
       nextLevelReq = filterType[potentialLevel];
       needCards = nextLevelReq.cards;
       ostatok = ostatok - needCards;
@@ -22,6 +24,9 @@ export const calculate = (cards, level, type, data) => {
 
   return {
     potentialLevel,
-    needs: filterType[potentialLevel + 1].cards - ostatok,
+    needs:
+      potentialLevel + 1 > MAX_LEVEL
+        ? 0
+        : filterType[potentialLevel + 1].cards - ostatok,
   };
 };

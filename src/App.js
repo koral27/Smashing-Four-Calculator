@@ -34,9 +34,6 @@ const App = () => {
   const [activeUser, setActiveUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const db = firebase.database();
-  const usersData = db.ref('users');
-
   const getData = () => {
     firebase
       .database()

@@ -14,3 +14,13 @@
   background-color: #673ab7;
   color: white;
 }
+
+.levelField {
+  display: flex;
+}
+
+.levelField input {
+  margin: 0 4px;
+  text-align: center;
+  width: 40px;
+}
