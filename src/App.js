@@ -17,22 +17,41 @@ const mapHeroes = ({ name, heroType }) => {
   };
 };
 
-const initialData = [
-  {
+const initialData = {
+  admin: {
     username: 'admin',
     data: heroes.map(mapHeroes),
   },
-  {
+  user: {
     username: 'user',
     data: heroes.map(mapHeroes),
   },
-];
+};
 
 const App = () => {
   console.log('--- RENDER ---');
   const [users, setUsers] = useState(null);
   const [activeUser, setActiveUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const db = firebase.database();
+  const usersData = db.ref('users');
+
+  const getData = () => {
+    firebase
+      .database()
+      .ref('users')
+      .get()
+      .then((snapshot) => {
+        const users = snapshot.val();
+        setUsers(Object.values(users));
+        if (!activeUser) {
+          console.log('setActiveUser');
+
+          setActiveUser(Object.values(users)[0].username);
+        }
+      });
+  };
 
   useEffect(() => {
     console.log('--- useEffect ---');
@@ -42,18 +61,29 @@ const App = () => {
       .then(() => setLoading(false))
       .catch((e) => console.log('catch', e));
 
-    const db = firebase.database();
-    const usersData = db.ref('users');
     // usersData.set(initialData);
-    usersData.on('value', (snapshot) => {
-      const users = snapshot.val();
-      setUsers(users);
-      setActiveUser(users[0].username);
-    });
+
+    getData();
   }, []);
 
+  const update = (value, index, field) => {
+    firebase
+      .database()
+      .ref()
+      .child(`users/${activeUser}/data/${index}`)
+      .update({
+        [field]: Number(value),
+      })
+      .then(() => {
+        getData();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
-    <Context.Provider value={{ users, activeUser, setActiveUser }}>
+    <Context.Provider value={{ users, activeUser, update, setActiveUser }}>
       <div className="App">
         <div className="container">
           <Controls />

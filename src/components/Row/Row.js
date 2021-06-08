@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { data } from '../../constants';
+import { Context } from '../../context';
 import { calculate } from '../../utils';
 import './style.css';
 
-export const Row = ({ name, heroType, user = '', cards, level }) => {
-  const incomeType =
-    heroType === 'Обычный' ? 'common' : heroType === 'Редкий' ? 'rare' : 'epic';
+export const Row = ({ name, heroType, cards, level, index }) => {
+  const { update } = useContext(Context);
 
   return (
     <tr>
-      <td className={`${heroType} bold`}>
-        {name}({user})
-      </td>
+      <td className={`${heroType} bold`}>{name}</td>
       <td>
         {heroType === 'common'
           ? 'Обычный'
@@ -24,7 +22,7 @@ export const Row = ({ name, heroType, user = '', cards, level }) => {
           type="text"
           value={cards}
           onChange={(e) => {
-            // setCards(e.target.value);
+            update(e.target.value, index, 'cards');
           }}
         ></input>
       </td>
@@ -35,12 +33,12 @@ export const Row = ({ name, heroType, user = '', cards, level }) => {
           min={9}
           max={19}
           onChange={(e) => {
-            // setLevel(Number(e.target.value));
+            update(e.target.value, index, 'currentLevel');
           }}
         ></input>
       </td>
-      <td>{calculate(cards, level, incomeType, data).potentialLevel}</td>
-      <td>{calculate(cards, level, incomeType, data).needs}</td>
+      <td>{calculate(cards, level, heroType, data).potentialLevel}</td>
+      <td>{calculate(cards, level, heroType, data).needs}</td>
     </tr>
   );
 };

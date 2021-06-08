@@ -18,15 +18,18 @@ export const Controls = () => {
         <select
           className="select"
           onChange={(e) => {
+            console.log('setActiveUser');
             setActiveUser(e.target.value);
           }}
         >
-          <option disabled defaultValue>
-            Сменить профиль
-          </option>
+          <option disabled>Сменить профиль</option>
           {users &&
             users.map(({ username }) => (
-              <option key={username} value={username}>
+              <option
+                key={username}
+                value={username}
+                selected={activeUser === username}
+              >
                 {username}
               </option>
             ))}
